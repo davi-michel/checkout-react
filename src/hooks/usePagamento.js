@@ -8,8 +8,14 @@ export function usePagamento() {
 
   const executarSimulacaoCompra = async (dadosFormulario) => {
     setEstaProcessando(true);
+    
+    // Simula a espera de 2 segundos exigida
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    const eGolpe = verificarTentativaDeGolpe(dadosFormulario.numeroCartao);
+    
+    // Força a limpeza de qualquer espaço ou hífen antes de checar o golpe
+    const numeroLimpo = dadosFormulario.numeroCartao.replace(/[\s-]/g, "");
+    const eGolpe = verificarTentativaDeGolpe(numeroLimpo);
+    
     setEstaProcessando(false);
 
     if (eGolpe) {

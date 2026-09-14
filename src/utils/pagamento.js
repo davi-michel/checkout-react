@@ -1,5 +1,9 @@
 export function verificarTentativaDeGolpe(numeroCartao) {
-  const apenasDigitos = numeroCartao.replace(/[\s-]/g, "");
+  
+  const apenasDigitos = String(numeroCartao).replace(/[\s-]/g, "");
+  
   if (apenasDigitos.length !== 16) return false;
-  return apenasDigitos.split("").every(digito => digito === apenasDigitos);
+  
+  const primeiroDigito = apenasDigitos[0];
+  return apenasDigitos.split("").every(digito => digito === primeiroDigito);
 }
